@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="http://localhost:5000/find_flat" method = "post">
+<table>
+    <tr>
+        <td>
+              <label for="fname">First name:</label><br>
+              <input type="text" id="fname" name="fname"><br>
+              <label for="lname">Last name:</label><br>
+              <input type="text" id="lname" name="lname">
+        </td>
+        <td>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="age">Age:</label><br>
+            <input type="number" id="age" name="fage"><br>
+        </td>
+        <td>
+             <label for="preference1">Peferences</label>
+              <select id="preference1" name="preference1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+              <label for="sex">Choose the sex</label>
+              <select id="sex" name="sex">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+        </td>
+        <td>
+             <label for="preference2">Peferences</label>
+              <select id="preference2" name="preference2">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+              <label for="nationality">Choose the nationality</label>
+              <select id="nationality" name="nationality">
+                <option value="american">American</option>
+                <option value="english">English</option>
+                <option value="mexican">Mexican</option>
+                <option value="portuguese">Portuguese</option>
+              </select>
+        </td>
+        <td>
+              <label for="preference3">Peferences</label>
+              <select id="preference3" name="preference3">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+        </td>
+    </tr>
+</table>
+    <input type="submit" value="Find the flat">
+</form>
+</body>
+</html>
