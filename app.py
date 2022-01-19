@@ -8,8 +8,8 @@ session = driver.session()
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello_world():
+@app.route('/fill_the_flats')
+def fill_the_flats():
     # # # batch upload from csv
     query = """
     load csv with headers from "file:///Students.csv" as students create (a1:Student {name: students.name, age:tointeger(students.age), sex:students.sex,nationality:students.nationality})
@@ -84,6 +84,16 @@ def hello_world():
         session.run(query)
 
     return 'Hello World!'
+
+
+@app.route('/find_flat', methods=['POST', 'GET'])
+def find_flat():
+    print(request.form)
+    if request.method == 'POST':
+        return 'Success'
+
+    else:
+        return render_template('questionare1.html')
 
 
 if __name__ == '__main__':
