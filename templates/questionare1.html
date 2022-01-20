@@ -39,8 +39,8 @@
         <td>
               <label for="sex">Choose the sex</label>
               <select id="sex" name="sex">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="M">M</option>
+                <option value="F">F</option>
               </select>
         </td>
         <td>
@@ -58,10 +58,10 @@
         <td>
               <label for="nationality">Choose the nationality</label>
               <select id="nationality" name="nationality">
-                <option value="american">American</option>
-                <option value="english">English</option>
-                <option value="mexican">Mexican</option>
-                <option value="portuguese">Portuguese</option>
+                <option value="American">American</option>
+                <option value="English">English</option>
+                <option value="Mexican">Mexican</option>
+                <option value="Portuguese">Portuguese</option>
               </select>
         </td>
         <td>
@@ -77,6 +77,21 @@
     </tr>
 </table>
     <input type="submit" value="Find the flat">
+
+    <table style="border: 1px solid black; margin-top: 20px">
+    {% for flat in dictionary %}
+   <tr>
+   <td>
+      {{ flat['flat']['name'] }}
+   </td>
+   <td>
+      {{ flat['flat']['numberOfRooms'] }}
+   </td>
+
+   </tr>
+
+    {% endfor %}
+     </table>
 </form>
 </body>
 </html>

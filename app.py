@@ -78,19 +78,46 @@ def fill_the_flats():
         (a:Student),
         (b:Flat)
         WHERE a.name = '{student}' AND b.name = '{flat_name}'
-        CREATE (a)-[r:RELTYPE]->(b)
+        CREATE (a)-[r:lives_in]->(b)
         RETURN type(r)
         """
         session.run(query)
 
-    return 'Hello World!'
+    return 'The settling has been succsessful'
 
 
 @app.route('/find_flat', methods=['POST', 'GET'])
 def find_flat():
     print(request.form)
     if request.method == 'POST':
-        return 'Success'
+        name = request.form.get('fname')
+        last_name = request.form.get('lname')
+        age = int(request.form.get('fage'))
+        sex = request.form.get('sex')
+        nationality = request.form.get('nationality')
+        preferenceAge = int(request.form.get('preference1'))
+        preferenceSex = int(request.form.get('preference2'))
+        preferenceNationality = int(request.form.get('preference3'))
+        student = name + ' ' + last_name
+
+        # create the instance of potencial student
+        query = """
+        CREATE (n:Student {name: '%s', age: tointeger('%d'), nationality: '%s', sex:'%s'})
+        """ % (student, age, nationality, sex)
+        session.run(query)
+
+        query = """ match (f:Flat)<-[r2]-(s:Student)
+                    match (s4:Student{name:"%s"})
+                    with f as flat, avg(s.age) as avg_age , count(r2) as rels, s4.age as age_of_person, (apoc.coll.occurrences(collect(s.sex), s4.sex) * %d) as result_of_sex,(apoc.coll.occurrences(collect(s.nationality), s4.nationality) * %d) as result_of_nationality, abs(s4.age - avg(s.age))*(-0.25)*%d as result_of_age
+                    where rels<flat.numberOfRooms return flat,rels, avg_age, result_of_age,result_of_sex, result_of_nationality, (result_of_sex+ result_of_age+result_of_nationality)as weight
+                    order by weight desc
+        """ % (student, preferenceSex, preferenceNationality, preferenceAge)
+        results = session.run(query)
+        dictionary = []
+        for result in results:
+            dictionary.append(result.data())
+        print(dictionary)
+        return render_template('questionare1.html', dictionary=dictionary)
 
     else:
         return render_template('questionare1.html')
